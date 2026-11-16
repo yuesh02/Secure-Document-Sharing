@@ -1,0 +1,27 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  ssl:
+    bundle:
+      jks:
+        server:
+          key:
+            alias: secureprint
+          keystore:
+            location: ${DEV_KEYSTORE:classpath:dev-keystore.p12}
+            password: ${DEV_KEYSTORE_PASSWORD:changeit}
+            type: PKCS12
+server:
+  port: ${HTTPS_PORT:8443}
+  ssl:
+    enabled: true
+    key-store: ${DEV_KEYSTORE:classpath:dev-keystore.p12}
+    key-store-password: ${DEV_KEYSTORE_PASSWORD:changeit}
+    key-store-type: PKCS12
+    key-alias: secureprint
+app:
+  swagger-enabled: true
+springdoc:
+  swagger-ui:
+    enabled: true

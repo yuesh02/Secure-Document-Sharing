@@ -1,0 +1,14 @@
+spring:
+  config:
+    activate:
+      on-profile: demo
+app:
+  swagger-enabled: true
+  admin-email: admin@demo.local
+  admin-password: demo-admin-password
+  jwt:
+    secret: demo-only-change-this-secret-32-bytes-minimum
+  master-key: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+springdoc:
+  swagger-ui:
+    enabled: true

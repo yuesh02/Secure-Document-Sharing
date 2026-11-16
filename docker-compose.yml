@@ -1,0 +1,29 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: secureprint
+      MYSQL_USER: secureprint
+      MYSQL_PASSWORD: secureprint
+      MYSQL_ROOT_PASSWORD: root-change-this
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  backend:
+    build: .
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/secureprint
+      DB_USERNAME: secureprint
+      DB_PASSWORD: secureprint
+      JWT_SECRET: replace-with-a-long-random-secret
+      APP_MASTER_KEY: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      ADMIN_EMAIL: admin@example.com
+      ADMIN_PASSWORD: replace-this
+      STORAGE_DIRECTORY: /app/storage

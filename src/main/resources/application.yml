@@ -1,0 +1,46 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: ${UPLOAD_MAX_BYTES:10485760}
+      max-request-size: ${UPLOAD_MAX_BYTES:10485760}
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+server:
+  port: ${SERVER_PORT:8080}
+  forward-headers-strategy: framework
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    lifetime: ${JWT_LIFETIME:PT1H}
+  master-key: ${APP_MASTER_KEY}
+  storage-directory: ${STORAGE_DIRECTORY:./storage}
+  upload-max-bytes: ${UPLOAD_MAX_BYTES:10485760}
+  policy-max-expiry: ${POLICY_MAX_EXPIRY:PT24H}
+  policy-max-print-count: ${POLICY_MAX_PRINT_COUNT:100}
+  cleanup-interval: ${CLEANUP_INTERVAL:PT1H}
+  cleanup:
+    interval-ms: ${CLEANUP_INTERVAL_MS:60000}
+  edit:
+    max-overlays: ${EDIT_MAX_OVERLAYS:50}
+    max-text-length: ${EDIT_MAX_TEXT_LENGTH:500}
+    min-font-size: ${EDIT_MIN_FONT_SIZE:6}
+    max-font-size: ${EDIT_MAX_FONT_SIZE:72}
+  cors-allowed-origin: ${CORS_ALLOWED_ORIGIN:http://localhost:3000}
+  admin-email: ${ADMIN_EMAIL:}
+  admin-password: ${ADMIN_PASSWORD:}
+  swagger-enabled: ${SWAGGER_ENABLED:false}
+  rate-limit:
+    requests: ${RATE_LIMIT_REQUESTS:20}
+    window-seconds: ${RATE_LIMIT_WINDOW_SECONDS:60}
